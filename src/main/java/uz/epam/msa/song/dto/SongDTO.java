@@ -1,4 +1,4 @@
-package uz.epam.msa.song.song.dto;
+package uz.epam.msa.song.dto;
 
 import lombok.Data;
 

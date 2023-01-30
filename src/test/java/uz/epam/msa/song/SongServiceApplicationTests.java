@@ -1,4 +1,4 @@
-package uz.epam.msa.song.song;
+package uz.epam.msa.song;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
