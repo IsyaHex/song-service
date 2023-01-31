@@ -14,6 +14,7 @@ import uz.epam.msa.song.service.SongsService;
 import uz.epam.msa.song.domain.Song;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -32,12 +33,13 @@ public class SongsServiceImpl implements SongsService {
     public ResourceDTO createSongRecord(SongDTO data) throws SongValidationException {
         Song song = new Song();
         try {
-            song.setName(data.getName());
-            song.setArtist(data.getArtist());
-            song.setAlbum(data.getAlbum());
+            song.setName(Objects.requireNonNull(data.getName()));
+            song.setArtist(Objects.requireNonNull(data.getArtist()));
+            song.setAlbum(Objects.requireNonNull(data.getAlbum()));
             song.setLength(data.getLength());
             song.setYear(data.getYear());
             song.setResourceId(data.getResourceId());
+            song.setDeleted(false);
 
         } catch (Exception e) {
             throw new SongValidationException(ExceptionConstants.VALIDATION_EXCEPTION);
@@ -48,14 +50,13 @@ public class SongsServiceImpl implements SongsService {
     @Override
     public SongDTO getSong(Integer id) throws SongNotFoundException {
         return repository.findById(id)
+                .filter(song -> !song.getDeleted())
                 .map(song -> mapper.map(song, SongDTO.class))
                 .orElseThrow(() -> new SongNotFoundException(ExceptionConstants.RESOURCE_NOT_FOUND_EXCEPTION));
     }
 
     @Override
     public DeletedResourcesDTO deleteResources(String ids) {
-        if(!ids.matches("((?<!^,)\\\\d+(,(?!$)|$))+"))
-            throw new InternalServerError(ExceptionConstants.INTERNAL_SERVER_ERROR);
         DeletedResourcesDTO dto = new DeletedResourcesDTO();
         dto.setIds(Arrays.stream(ids.split(","))
                 .filter(id -> id.matches("[0-9]"))

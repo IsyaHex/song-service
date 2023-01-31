@@ -9,7 +9,9 @@ import javax.persistence.*;
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "song_seq", sequenceName = "seq_song", allocationSize = 1)
     private Integer id;
+
     private String name;
     private String artist;
     private String album;

@@ -14,7 +14,7 @@
 
         <createTable tableName="song">
             <column name="id" type="number">
-                <constraints primaryKey="true" primaryKeyName="pk_resource_id"/>
+                <constraints primaryKey="true" primaryKeyName="pk_song_id"/>
             </column>
             <column name="name" type="varchar2(255)">
                 <constraints nullable="false"/>
@@ -31,13 +31,15 @@
             <column name="year" type="varchar2(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="resourceId" type="varchar2(255)">
+            <column name="resource_id" type="varchar2(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="deleted" type="boolean">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
+        <addAutoIncrement columnDataType="number" columnName="id" incrementBy="1" startWith="1" tableName="song"/>
 
         <setTableRemarks tableName="song" remarks="List of songs"/>
     </changeSet>

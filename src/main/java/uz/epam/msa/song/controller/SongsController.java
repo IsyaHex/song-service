@@ -10,6 +10,8 @@ import uz.epam.msa.song.exception.SongNotFoundException;
 import uz.epam.msa.song.exception.SongValidationException;
 import uz.epam.msa.song.service.SongsService;
 
+import javax.validation.constraints.Max;
+
 @RestController
 @RequestMapping("/songs")
 public class SongsController {
@@ -26,13 +28,14 @@ public class SongsController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public SongDTO getResource(@PathVariable("id") Integer id) throws SongNotFoundException {
         return service.getSong(id);
     }
 
-    @DeleteMapping("?id={ids}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public DeletedResourcesDTO deleteResources(@PathVariable String ids) throws Exception {
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public DeletedResourcesDTO deleteResources(@RequestParam(value = "id") @Max(200) String ids) {
         return service.deleteResources(ids);
     }
 }

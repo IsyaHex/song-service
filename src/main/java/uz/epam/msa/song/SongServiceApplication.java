@@ -3,9 +3,11 @@ package uz.epam.msa.song;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"uz.epam.msa.song"})
 @EnableJpaRepositories("uz.epam.msa.song.repository")
 @EntityScan("uz.epam.msa.song.domain")
 public class SongServiceApplication {
