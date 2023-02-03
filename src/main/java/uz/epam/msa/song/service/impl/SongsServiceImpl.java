@@ -2,11 +2,10 @@ package uz.epam.msa.song.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import uz.epam.msa.song.constant.ExceptionConstants;
+import uz.epam.msa.song.constant.Constants;
 import uz.epam.msa.song.dto.DeletedResourcesDTO;
 import uz.epam.msa.song.dto.ResourceDTO;
 import uz.epam.msa.song.dto.SongDTO;
-import uz.epam.msa.song.exception.InternalServerError;
 import uz.epam.msa.song.exception.SongNotFoundException;
 import uz.epam.msa.song.exception.SongValidationException;
 import uz.epam.msa.song.repository.SongsRepository;
@@ -42,7 +41,7 @@ public class SongsServiceImpl implements SongsService {
             song.setDeleted(false);
 
         } catch (Exception e) {
-            throw new SongValidationException(ExceptionConstants.VALIDATION_EXCEPTION);
+            throw new SongValidationException(Constants.VALIDATION_EXCEPTION);
         }
         return mapper.map(repository.save(song), ResourceDTO.class);
     }
@@ -52,17 +51,18 @@ public class SongsServiceImpl implements SongsService {
         return repository.findById(id)
                 .filter(song -> !song.getDeleted())
                 .map(song -> mapper.map(song, SongDTO.class))
-                .orElseThrow(() -> new SongNotFoundException(ExceptionConstants.RESOURCE_NOT_FOUND_EXCEPTION));
+                .orElseThrow(() -> new SongNotFoundException(Constants.RESOURCE_NOT_FOUND_EXCEPTION));
     }
 
     @Override
     public DeletedResourcesDTO deleteResources(String ids) {
         DeletedResourcesDTO dto = new DeletedResourcesDTO();
-        dto.setIds(Arrays.stream(ids.split(","))
-                .filter(id -> id.matches("[0-9]"))
+        dto.setIds(Arrays.stream(ids.split(Constants.COMMA_REGEX))
+                .filter(id -> id.matches(Constants.NUMBER_REGEX))
                 .map(id -> repository.findById(Integer.parseInt(id)))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
+                .filter(file -> !file.getDeleted())
                 .peek(file -> file.setDeleted(true))
                 .map(repository::save)
                 .map(Song::getId)
