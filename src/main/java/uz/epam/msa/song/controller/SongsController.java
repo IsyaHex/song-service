@@ -1,6 +1,7 @@
 package uz.epam.msa.song.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.epam.msa.song.dto.DeletedResourcesDTO;
@@ -21,8 +22,10 @@ public class SongsController {
         this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<ResourceDTO> uploadResource(SongDTO data) throws SongValidationException {
+    @PostMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResourceDTO> uploadResource(@RequestBody SongDTO data) throws SongValidationException {
         ResourceDTO dto = service.createSongRecord(data);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
