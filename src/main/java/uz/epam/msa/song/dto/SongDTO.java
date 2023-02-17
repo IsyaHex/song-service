@@ -2,8 +2,10 @@ package uz.epam.msa.song.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class SongDTO {
+public class SongDTO implements Serializable {
     private String name;
     private String artist;
     private String album;
