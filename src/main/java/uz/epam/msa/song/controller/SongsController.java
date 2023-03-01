@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.epam.msa.song.dto.DeletedResourcesDTO;
+import uz.epam.msa.song.dto.DeletedSongsDTO;
 import uz.epam.msa.song.dto.ResourceDTO;
 import uz.epam.msa.song.dto.SongDTO;
 import uz.epam.msa.song.exception.SongNotFoundException;
@@ -38,7 +38,7 @@ public class SongsController {
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
-    public DeletedResourcesDTO deleteResources(@RequestParam(value = "id") @Max(200) String ids) {
-        return service.deleteResources(ids);
+    public DeletedSongsDTO deleteResources(@RequestParam(value = "id") @Max(200) String ids) {
+        return service.deleteSongs(ids);
     }
 }

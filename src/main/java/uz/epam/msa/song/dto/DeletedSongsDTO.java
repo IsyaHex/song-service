@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class DeletedResourcesDTO {
+public class DeletedSongsDTO {
     @JsonProperty(value = "ids")
     private List<Integer> ids;
 }
