@@ -25,20 +25,20 @@ public class SongsController {
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResourceDTO> uploadResource(@RequestBody SongDTO data) throws SongValidationException {
+    public ResponseEntity<ResourceDTO> uploadSong(@RequestBody SongDTO data) throws SongValidationException {
         ResourceDTO dto = service.createSongRecord(data);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public SongDTO getResource(@PathVariable("id") Integer id) throws SongNotFoundException {
+    public SongDTO getSong(@PathVariable("id") Integer id) throws SongNotFoundException {
         return service.getSong(id);
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
-    public DeletedSongsDTO deleteResources(@RequestParam(value = "id") @Max(200) String ids) {
+    public DeletedSongsDTO deleteSongs(@RequestParam(value = "id") @Max(200) String ids) {
         return service.deleteSongs(ids);
     }
 }

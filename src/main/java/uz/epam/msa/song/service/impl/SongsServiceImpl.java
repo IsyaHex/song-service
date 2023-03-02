@@ -44,7 +44,7 @@ public class SongsServiceImpl implements SongsService {
         return repository.findById(id)
                 .filter(song -> !song.getDeleted())
                 .map(song -> mapper.map(song, SongDTO.class))
-                .orElseThrow(() -> new SongNotFoundException(Constants.RESOURCE_NOT_FOUND_EXCEPTION));
+                .orElseThrow(() -> new SongNotFoundException(Constants.SONG_NOT_FOUND_EXCEPTION));
     }
 
     @Override
