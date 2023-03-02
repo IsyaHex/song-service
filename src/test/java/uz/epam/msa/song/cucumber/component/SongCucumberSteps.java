@@ -1,4 +1,4 @@
-package uz.epam.msa.song.cucumber;
+package uz.epam.msa.song.cucumber.component;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

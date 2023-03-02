@@ -67,11 +67,11 @@ public class SongsIntegrationTest {
     private SongDTO getDto() {
         SongDTO dto = new SongDTO();
         dto.setName("test");
-        dto.setLength("99999");
+        dto.setLength("2h");
         dto.setAlbum("test-album");
         dto.setArtist("test-artist");
-        dto.setYear("1995-12-06");
-        dto.setResourceId("99999");
+        dto.setYear("1995");
+        dto.setResourceId("5");
 
         return dto;
     }

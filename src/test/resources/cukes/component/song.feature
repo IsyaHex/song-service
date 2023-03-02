@@ -1,4 +1,4 @@
-@song
+@component
 Feature: Customer functionalities
 
   Background:
