@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,7 @@ import uz.epam.msa.song.SongServiceApplication;
 import uz.epam.msa.song.domain.Song;
 import uz.epam.msa.song.dto.DeletedSongsDTO;
 import uz.epam.msa.song.dto.ResourceDTO;
-import uz.epam.msa.song.entity.SongDTO;
+import uz.epam.msa.song.dto.SongDTO;
 import uz.epam.msa.song.repository.SongsRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,8 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestPropertySource(locations = "classpath:application-integration-test.properties")
 public class SongsIntegrationTest {
 
-    @LocalServerPort
-    private int port;
     @Autowired
     private TestRestTemplate template;
 
