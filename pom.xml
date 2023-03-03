@@ -112,7 +112,11 @@
 			<artifactId>selenium-chrome-driver</artifactId>
 			<version>4.7.1</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-contract-verifier</artifactId>
+			<version>3.1.6</version>
+		</dependency>
 
 	</dependencies>
 	<dependencyManagement>
@@ -146,6 +150,15 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
+				<version>3.1.6</version>
+				<extensions>true</extensions>
+				<configuration>
+					<baseClassForTests>uz.epam.msa.song.contract.SongServiceContractTest</baseClassForTests>
 				</configuration>
 			</plugin>
 		</plugins>
