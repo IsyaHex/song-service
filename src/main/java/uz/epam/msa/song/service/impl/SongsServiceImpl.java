@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import uz.epam.msa.song.constant.Constants;
 import uz.epam.msa.song.domain.Song;
-import uz.epam.msa.song.dto.DeletedResourcesDTO;
+import uz.epam.msa.song.dto.DeletedSongsDTO;
 import uz.epam.msa.song.dto.ResourceDTO;
 import uz.epam.msa.song.dto.SongDTO;
 import uz.epam.msa.song.exception.SongNotFoundException;
@@ -29,9 +29,9 @@ public class SongsServiceImpl implements SongsService {
 
     @Override
     public ResourceDTO createSongRecord(SongDTO data) throws SongValidationException {
-        Song song = new Song();
+        Song song;
         try {
-            mapper.map(data, song);
+            song = mapper.map(data, Song.class);
             song.setDeleted(false);
         } catch (Exception e) {
             throw new SongValidationException(Constants.VALIDATION_EXCEPTION);
@@ -44,12 +44,12 @@ public class SongsServiceImpl implements SongsService {
         return repository.findById(id)
                 .filter(song -> !song.getDeleted())
                 .map(song -> mapper.map(song, SongDTO.class))
-                .orElseThrow(() -> new SongNotFoundException(Constants.RESOURCE_NOT_FOUND_EXCEPTION));
+                .orElseThrow(() -> new SongNotFoundException(Constants.SONG_NOT_FOUND_EXCEPTION));
     }
 
     @Override
-    public DeletedResourcesDTO deleteResources(String ids) {
-        DeletedResourcesDTO dto = new DeletedResourcesDTO();
+    public DeletedSongsDTO deleteSongs(String ids) {
+        DeletedSongsDTO dto = new DeletedSongsDTO();
         dto.setIds(Arrays.stream(ids.split(Constants.COMMA_REGEX))
                 .filter(id -> id.matches(Constants.NUMBER_REGEX))
                 .map(id -> repository.findById(Integer.parseInt(id)))
