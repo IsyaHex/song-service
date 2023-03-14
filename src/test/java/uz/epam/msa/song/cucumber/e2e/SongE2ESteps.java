@@ -6,16 +6,11 @@ import io.cucumber.java.en.When;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 public class SongE2ESteps {
-
-    @Autowired
-    private TestRestTemplate template;
 
     private WebDriver driver;
 
@@ -23,7 +18,8 @@ public class SongE2ESteps {
 
     @Given("The user opened a browser and passed {string}")
     public void app_base_url(String baseUrl) {
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","chromedriver.exe");
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
         driver = new ChromeDriver();
         log.info("Application URL -> " + baseUrl);
         URL = baseUrl;
