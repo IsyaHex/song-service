@@ -12,7 +12,6 @@ import uz.epam.msa.song.exception.SongValidationException;
 
 @RestControllerAdvice
 public class ExceptionProcessor extends ResponseEntityExceptionHandler {
-    private static final int PARTIAL_CONTENT = 206;
     private static final int INCORRECT_PARAMETER_VALUE_CODE = 400;
     private static final int RESOURCE_NOT_FOUND_CODE = 404;
     private static final int INTERNAL_SERVER_ERROR = 500;

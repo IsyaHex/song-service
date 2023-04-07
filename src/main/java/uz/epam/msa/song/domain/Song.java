@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "song_seq", sequenceName = "seq_song", allocationSize = 1)
     private Integer id;
 
     @NotNull
