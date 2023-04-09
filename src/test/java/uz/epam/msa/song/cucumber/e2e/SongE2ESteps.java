@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
@@ -24,7 +25,9 @@ public class SongE2ESteps {
     @Given("The user opened a browser and passed {string}")
     public void app_base_url(String baseUrl) {
         System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
         log.info("Application URL -> " + baseUrl);
         URL = baseUrl;
     }
