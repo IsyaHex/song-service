@@ -33,10 +33,11 @@ public class SongsServiceImpl implements SongsService {
         try {
             song = mapper.map(data, Song.class);
             song.setDeleted(false);
+            repository.save(song);
         } catch (Exception e) {
             throw new SongValidationException(Constants.VALIDATION_EXCEPTION);
         }
-        return mapper.map(repository.save(song), ResourceDTO.class);
+        return new ResourceDTO(Integer.parseInt(data.getResourceId()));
     }
 
     @Override
