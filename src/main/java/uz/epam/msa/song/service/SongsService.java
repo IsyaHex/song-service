@@ -7,7 +7,7 @@ import uz.epam.msa.song.exception.SongNotFoundException;
 import uz.epam.msa.song.exception.SongValidationException;
 
 public interface SongsService {
-    ResourceDTO createSongRecord(SongDTO data) throws SongValidationException;
+    ResourceDTO createSongRecord(SongDTO data, boolean processorCall) throws SongValidationException;
     SongDTO getSong(Integer id) throws SongNotFoundException;
     DeletedSongsDTO deleteSongs(String ids);
 }

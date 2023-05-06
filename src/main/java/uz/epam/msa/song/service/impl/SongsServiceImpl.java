@@ -28,16 +28,19 @@ public class SongsServiceImpl implements SongsService {
     }
 
     @Override
-    public ResourceDTO createSongRecord(SongDTO data) throws SongValidationException {
+    public ResourceDTO createSongRecord(SongDTO data, boolean processorCall) throws SongValidationException {
         Song song;
         try {
             song = mapper.map(data, Song.class);
             song.setDeleted(false);
-            repository.save(song);
+            if(processorCall) {
+                repository.save(song);
+                return new ResourceDTO(Integer.parseInt(data.getResourceId()));
+            }
         } catch (Exception e) {
             throw new SongValidationException(Constants.VALIDATION_EXCEPTION);
         }
-        return new ResourceDTO(Integer.parseInt(data.getResourceId()));
+        return mapper.map(repository.save(song), ResourceDTO.class);
     }
 
     @Override

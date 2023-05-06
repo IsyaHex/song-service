@@ -47,7 +47,7 @@ public class SongsServiceImplTest {
         when(repository.save(song)).thenReturn(song);
         when(mapper.map(repository.save(song), ResourceDTO.class)).thenReturn(resource);
 
-        assertEquals(resource, service.createSongRecord(dto));
+        assertEquals(resource, service.createSongRecord(dto, false));
     }
 
     @Test

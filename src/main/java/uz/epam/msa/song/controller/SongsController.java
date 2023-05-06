@@ -26,7 +26,15 @@ public class SongsController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResourceDTO> uploadSong(@RequestBody SongDTO data) throws SongValidationException {
-        ResourceDTO dto = service.createSongRecord(data);
+        ResourceDTO dto = service.createSongRecord(data, false);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+    }
+
+    @PostMapping(value = "/processing",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResourceDTO> processorUploadSong(@RequestBody SongDTO data) throws SongValidationException {
+        ResourceDTO dto = service.createSongRecord(data, true);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
