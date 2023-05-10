@@ -7,7 +7,7 @@ import uz.epam.msa.song.SongServiceApplication;
 
 @CucumberContextConfiguration
 @TestPropertySource(locations = "classpath:application-integration-test.properties")
-@SpringBootTest(classes = SongServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes = {SongServiceApplication.class, TestSecurityConfig.class}, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class CucumberSpringContextConfig {
 
 }

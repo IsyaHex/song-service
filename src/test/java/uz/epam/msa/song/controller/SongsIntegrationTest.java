@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import uz.epam.msa.song.SongServiceApplication;
+import uz.epam.msa.song.configuration.TestSecurityConfig;
 import uz.epam.msa.song.domain.Song;
 import uz.epam.msa.song.dto.DeletedSongsDTO;
 import uz.epam.msa.song.dto.ResourceDTO;
@@ -19,7 +20,9 @@ import uz.epam.msa.song.repository.SongsRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(classes = SongServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(
+        classes = {SongServiceApplication.class, TestSecurityConfig.class},
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestPropertySource(locations = "classpath:application-integration-test.properties")
 public class SongsIntegrationTest {
 

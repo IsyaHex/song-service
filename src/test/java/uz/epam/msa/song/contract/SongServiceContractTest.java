@@ -1,26 +1,25 @@
 package uz.epam.msa.song.contract;
 
-import org.junit.Before;
+import io.restassured.module.mockmvc.RestAssuredMockMvc;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.verifier.messaging.boot.AutoConfigureMessageVerifier;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder;
-import uz.epam.msa.song.controller.SongsController;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @DirtiesContext
 @AutoConfigureMessageVerifier
+@TestPropertySource(locations = "classpath:application-integration-test.properties")
 public class SongServiceContractTest {
 
     @Autowired
-    private SongsController controller;
+    private WebApplicationContext context;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        StandaloneMockMvcBuilder standaloneMockMvcBuilder
-                = MockMvcBuilders.standaloneSetup(controller);
-        MockMvcBuilders.standaloneSetup(standaloneMockMvcBuilder);
+        RestAssuredMockMvc.webAppContextSetup(context);
     }
 }

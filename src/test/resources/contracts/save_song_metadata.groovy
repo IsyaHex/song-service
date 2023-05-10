@@ -26,13 +26,5 @@ Contract.make {
         headers {
             contentType applicationJson()
         }
-        body (
-                name: "test",
-                artist: "test-artist",
-                album: "test-album",
-                length: "99999",
-                year: "99999",
-                resourceId: "999"
-        )
     }
 }
